@@ -1,0 +1,89 @@
+@vw: 3.75vw;
+@txt-color: #ffdc98;
+@border-width-base: 1px;
+@border-color: #ebedf0;
+
+//超过显示省略号
+.one-line() {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+//换行
+.tag-norwap(@height:35px) {
+    word-break: break-all;
+    white-space: normal;
+    max-height: @height;
+    overflow-y: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+}
+
+.absolute-center() {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.flex-center() {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text-gradient(@gradient) {
+    background: @gradient;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+.gradient(@color1,@color2) {
+    background: linear-gradient(-80deg, @color1, @color2);
+    background: -webkit-linear-gradient(-80deg, @color1, @color2);
+}
+.translate3d() {
+    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
+}
+/*ready go动画*/
+.go(@count) when (@count > 0) {
+    &:nth-of-type(@{count}) {
+        animation-delay: -0.1s * @count;
+    }
+}
+
+/** .9图 vw单位 */
+.point-9-vw(@url,@width,@height,@top,@right,@bottom,@left,@multiple) {
+    width: (@width - @right - @left) / @vw;
+    height: (@height - @top - @bottom) / @vw;
+    border-top: @top / @vw solid #000;
+    border-right: @right / @vw solid #000;
+    border-bottom: @bottom / @vw solid #000;
+    border-left: @left / @vw solid #000;
+    border-image-source: @url;
+    border-image-slice: (@top* @multiple) (@right* @multiple) (@bottom* @multiple) (@left* @multiple) fill;
+    border-image-width: @top / @vw @right / @vw @bottom / @vw @left / @vw;
+    border-image-repeat: repeat;
+}
+/** .9图 px单位 */
+.point-9-px(@url,@width,@height,@top,@right,@bottom,@left,@multiple) {
+    width: (@width - @right - @left) + 0px;
+    height: (@height - @top - @bottom) + 0px;
+    border-top: @top + 0px solid #000;
+    border-right: @right + 0px solid #000;
+    border-bottom: @bottom + 0px solid #000;
+    border-left: @left + 0px solid #000;
+    border-image-source: @url;
+    border-image-slice: (@top* @multiple) (@right* @multiple) (@bottom* @multiple) (@left* @multiple) fill;
+    border-image-width: @top + 0px @right + 0px @bottom + 0px @left + 0px;
+    border-image-repeat: repeat;
+}
+
+.pic-bg(@url, @width, @height) {
+    width: @width;
+    height: @height;
+    background: @url no-repeat;
+    background-size: 100% 100%;
+}

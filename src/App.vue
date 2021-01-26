@@ -1,26 +1,56 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js App" />
+    <f7-app v-bind="f7params">
+        <f7-view main url="/"></f7-view>
+    </f7-app>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import { reactive, toRefs, onMounted } from 'vue';
+import { f7 } from 'framework7-vue';
+import routes from './routes';
 
 export default {
-  name: "App",
-  components: {
-    HelloWorld,
-  },
+    name: 'App',
+    setup() {
+        const state = reactive({
+            f7params: {
+                id: 'com.myapp.app',
+                name: 'F7Vue3',
+                theme: 'ios',
+                routes,
+                view: {
+                    browserHistory: true,
+                    browserHistorySeparator: '#',
+                },
+            },
+        });
+
+        const routeChange = (newRoute) => {
+            window.document.title = newRoute.name;
+        };
+
+        onMounted(() => {
+            // watch route
+            f7.views.main.router.on('routeChange', routeChange);
+        });
+
+        return {
+            ...toRefs(state),
+        };
+    },
 };
 </script>
 
 <style lang="less">
+@import './styles/reset.less';
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+    // width: 375pt; ===> width: 100vw;
+    padding: 0;
+    *::-webkit-scrollbar {
+        display: none;
+    }
+    .page-content {
+        padding: 0;
+    }
 }
 </style>

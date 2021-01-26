@@ -1,0 +1,106 @@
+@import "./varsbank.less";
+@import "./mixins/hairline.less";
+@import "./mixins/ellipsis.less";
+
+//全局样式
+body {
+  max-width: 720px;
+  box-sizing: border-box;
+}
+ul {
+  list-style: none;
+}
+li {
+  list-style-type: none;
+}
+div,
+p,
+ul,
+li,
+em,
+i,
+h3,
+span,
+input {
+  margin: 0;
+  padding: 0;
+}
+img {
+  display: block;
+}
+
+// 1px边框
+[class*="mf-hairline"] {
+  &::after {
+    .hairline();
+  }
+}
+.mf-hairline {
+  &,
+  &_top,
+  &_right,
+  &_bottom,
+  &_left,
+  &_surround,
+  &_top-bottom {
+    position: relative;
+  }
+
+  &_top::after {
+    border-top-width: @border-width-base;
+  }
+  &_right::after {
+    border-right-width: @border-width-base;
+  }
+  &_left::after {
+    border-left-width: @border-width-base;
+  }
+  &_bottom::after {
+    border-bottom-width: @border-width-base;
+  }
+
+  &,
+  &-unset {
+    &_top-bottom::after {
+      border-width: @border-width-base 0;
+    }
+  }
+
+  &_surround::after {
+    border-width: @border-width-base;
+  }
+}
+
+// 自动缩略
+.mf-ellipsis {
+  .ellipsis();
+}
+.mf-multi-ellipsis--l2 {
+  .multi-ellipsis(2);
+}
+.mf-multi-ellipsis--l3 {
+  .multi-ellipsis(3);
+}
+
+.fade-enter-active {
+  transition: all 0.3s ease;
+}
+.fade-leave-active {
+  transition: all 0.3s ease;
+}
+.fade-enter, .fade-leave-to
+/* .slide-fade-leave-active for below version 2.1.8 */ {
+  opacity: 0;
+}
+
+.slide-fade-enter-active {
+  transition: all 0.5s ease;
+}
+.slide-fade-leave-active {
+  transition: all 0.5s ease;
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active for below version 2.1.8 */ {
+  transform: translateY(100%);
+  opacity: 0;
+}

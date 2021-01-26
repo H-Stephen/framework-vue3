@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "core-js": "^3.8.1",
+    "framework7": "^6.0.3",
+    "framework7-vue": "^6.0.3",
     "vue": "^3.0.4"
   },
   "devDependencies": {
@@ -24,6 +26,7 @@
     "eslint-plugin-vue": "^7.2.0",
     "less": "^3.0.4",
     "less-loader": "^5.0.0",
+    "postcss-px-to-viewport": "^1.1.1",
     "prettier": "^2.2.1"
   }
 }
